@@ -1,0 +1,151 @@
+COMPILER ScrumTaskboard
+
+/* Stefan Schiffer, 29.11.2020 */
+
+/*----------------------------------------------------------
+  --- GLOBAL FIELDS AND METHODS
+  ----------------------------------------------------------*/
+
+    void println(String string) { 
+		System.out.println(string);
+	}
+		
+	
+/*----------------------------------------------------------
+  --- SCANNER
+  ----------------------------------------------------------*/
+
+CHARACTERS
+    digit =  "0123456789".
+    hour1st	= "012".
+    min1st = "012345".
+    letter =  'a'..'z'. 
+    anyButQuote = ANY - '"'.
+
+TOKENS
+    initials = letter { letter }.
+    string = '"' { anyButQuote } '"'.
+    date = digit digit digit digit '-' digit digit '-' digit digit.
+    time = hour1st digit ':' min1st digit.
+	bezeichnung = digit digit letter.
+	kommazahl = digit {digit} ["." digit].
+	ganzzahl = digit {digit} .
+   
+COMMENTS FROM "/*" TO "*/" NESTED
+
+IGNORE '\r' + '\n' + '\t'
+
+/*----------------------------------------------------------
+  --- PARSER
+  ----------------------------------------------------------*/
+
+PRODUCTIONS
+
+ScrumTaskboard = 
+
+	(. 
+	println("Entwickler/innen:"); 
+	.)
+	
+    "Export" "of" "Taskboard" date time 
+    "Developers" (. int devs = 0; .)
+	{ Developer (. devs++; .) }
+	
+	(. 
+	println(""); 
+	println("Das sind " + devs + " Entwickler/innen."); 
+	println(""); 
+	.)
+	
+	"Tasks" (. int task = 0; .)
+	{ Tasks (. task++; .) }
+	
+	(. 
+	println(""); 
+	println("Es gibt " + task + " Tasks."); 
+	println(""); 
+	.)
+	
+	"Bookings" (. int book = 0; .)
+	{ Booking (. book++; .) }
+	
+	(. 
+	println(""); 
+	println("Das sind " + book + " Bookings."); 
+	println(""); 
+	.)
+	
+	(.
+	
+	.)
+	
+	.
+
+Developer = 
+    Initials<^String initials> 
+    Name<^String name> 
+	(. println("    " + name + " ["+ initials +"]"); .)
+	.
+		
+Initials<^String initials> =
+	initials (. initials = t.val; .)
+	.
+	
+Name<^String name> =
+    string (. name = t.val; .)
+	.	
+		
+Booking = 
+	Bezeichnung<^String bezeichnung>
+	(. println(bezeichnung);  .)
+	Inhalt {Inhalt}
+	.
+	
+Bezeichnung<^String bezeichnung> =
+	 bezeichnung (. bezeichnung = t.val; .)
+	.	
+	
+Inhalt = 
+	Date<^String date>
+	Kommazahl<^float kommazahl1>
+	(. println("	" + date + ": " + kommazahl1);  .)
+	WorkDone {WorkDone}
+	.
+
+WorkDone = 
+	Initials<^String init>
+	Kommazahl<^float kommazahl2>
+	(. 
+	println("		" + init + " - " + kommazahl2);
+	.)
+	.
+
+Date<^String date> = 
+	date (. date = t.val; .)
+	.
+	
+Kommazahl<^float kommazahl> =
+	kommazahl (. kommazahl = Float.valueOf(t.val); .)
+	.
+	
+Tasks = 
+    id<^String id> 
+    status<^String status> 
+	remainingEffort<^int remainingEffort> 
+	description<^String description> 
+	(. println(id + " " + status + " " + remainingEffort+ "'"+ description +"'"); .)
+	.
+id<^String id> =
+	string (. id = t.val; .)
+	.
+status<^String status> =
+    string (. status = t.val; .)
+	.	
+remainingEffort<^int remainingEffort> =
+    ganzzahl (. remainingEffort = Integer.parseInt(t.val); .)
+	.	
+description<^String description> =
+    string (. description = t.val; .)
+	.	
+
+END ScrumTaskboard.
