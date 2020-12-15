@@ -118,7 +118,6 @@ public class Parser {
 		println("Das sind " + book + " Bookings."); 
 		println(""); 
 		
-		
 	}
 
 	void Developer() {

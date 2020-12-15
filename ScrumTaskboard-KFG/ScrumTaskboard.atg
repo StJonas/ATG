@@ -43,33 +43,20 @@ PRODUCTIONS
 ScrumTaskboard = 
 
 	(. 
-	println("Entwickler/innen:"); 
+	println("ATG"); 
 	.)
 	
     "Export" "of" "Taskboard" date time 
-    "Developers" (. int devs = 0; .)
-	{ Developer (. devs++; .) }
+    "Developers" 
+	{ Developer }
 	
-	(. 
-	println(""); 
-	println("Das sind " + devs + " Entwickler/innen."); 
-	println(""); 
-	.)
-	
-	"Bookings" (. int book = 0; .)
-	{ Booking (. book++; .) }
-	
-	(. 
-	println(""); 
-	println("Das sind " + book + " Bookings."); 
-	println(""); 
-	.)
+	"Bookings"
+	{ Booking }
 	.
 
 Developer = 
     Initials<^String initials> 
     Name<^String name> 
-	(. println("    " + name + " ["+ initials +"]"); .)
 	.
 		
 Initials<^String initials> =
@@ -82,7 +69,6 @@ Name<^String name> =
 		
 Booking = 
 	Bezeichnung<^String bezeichnung>
-	(. println(bezeichnung);  .)
 	Inhalt {Inhalt}
 	.
 	
@@ -93,16 +79,12 @@ Bezeichnung<^String bezeichnung> =
 Inhalt = 
 	Date<^String date>
 	Kommazahl<^float kommazahl1>
-	(. println("	" + date + ": " + kommazahl1);  .)
 	WorkDone {WorkDone}
 	.
 
 WorkDone = 
 	Initials<^String init>
 	Kommazahl<^float kommazahl2>
-	(. 
-	println("		" + init + " - " + kommazahl2);
-	.)
 	.
 
 Date<^String date> = 

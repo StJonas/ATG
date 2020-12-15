@@ -99,36 +99,22 @@ public class Parser {
 		Expect(3);
 		Expect(4);
 		Expect(10);
-		int devs = 0; 
 		while (la.kind == 1) {
 			Developer();
-			devs++; 
 		}
-		println(""); 
-		println("Das sind " + devs + " Entwickler/innen."); 
-		println(""); 
-		
 		Expect(11);
-		int book = 0; 
 		while (la.kind == 5) {
 			Booking();
-			book++; 
 		}
-		println(""); 
-		println("Das sind " + book + " Bookings."); 
-		println(""); 
-		
 	}
 
 	void Developer() {
 		String initials = Initials();
 		String name = Name();
-		println("    " + name + " ["+ initials +"]"); 
 	}
 
 	void Booking() {
 		String bezeichnung = Bezeichnung();
-		println(bezeichnung);  
 		Inhalt();
 		while (la.kind == 3) {
 			Inhalt();
@@ -159,7 +145,6 @@ public class Parser {
 	void Inhalt() {
 		String date = Date();
 		float kommazahl1 = Kommazahl();
-		println("	" + date + ": " + kommazahl1);  
 		WorkDone();
 		while (la.kind == 1) {
 			WorkDone();
@@ -183,8 +168,6 @@ public class Parser {
 	void WorkDone() {
 		String init = Initials();
 		float kommazahl2 = Kommazahl();
-		println("		" + init + " - " + kommazahl2);
-		
 	}
 
 
