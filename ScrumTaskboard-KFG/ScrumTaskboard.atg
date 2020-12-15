@@ -28,7 +28,7 @@ TOKENS
     date = digit digit digit digit '-' digit digit '-' digit digit.
     time = hour1st digit ':' min1st digit.
 	bezeichnung = digit digit letter.
-	kommazahl = digit {digit} ["."] [digit].
+	kommazahl = digit {digit} ["." digit].
    
 COMMENTS FROM "/*" TO "*/" NESTED
 
@@ -56,15 +56,6 @@ ScrumTaskboard =
 	println(""); 
 	.)
 	
-	"Tasks" (. int task = 0; .)
-	{ Tasks (. task++; .) }
-	
-	(. 
-	println(""); 
-	println("Es gibt " + task + " Tasks."); 
-	println(""); 
-	.)
-	
 	"Bookings" (. int book = 0; .)
 	{ Booking (. book++; .) }
 	
@@ -72,6 +63,10 @@ ScrumTaskboard =
 	println(""); 
 	println("Das sind " + book + " Bookings."); 
 	println(""); 
+	.)
+	
+	(.
+	
 	.)
 	
 	.
@@ -122,25 +117,5 @@ Date<^String date> =
 Kommazahl<^float kommazahl> =
 	kommazahl (. kommazahl = Float.valueOf(t.val); .)
 	.
-	
-Tasks = 
-    id<^String id> 
-    status<^String status> 
-	remainingEffort<^float remainingEffort> 
-	description<^String description> 
-	(. println(id + " " + status + " " + remainingEffort+ "'"+ description +"'"); .)
-	.
-id<^String id> =
-	string (. id = t.val; .)
-	.
-status<^String status> =
-    string (. status = t.val; .)
-	.	
-remainingEffort<^float remainingEffort> =
-    kommazahl (. remainingEffort = Float.valueOf(t.val); .)
-	.	
-description<^String description> =
-    string (. description = t.val; .)
-	.	
 
 END ScrumTaskboard.
