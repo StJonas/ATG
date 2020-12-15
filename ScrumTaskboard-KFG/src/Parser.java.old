@@ -8,7 +8,7 @@ public class Parser {
 	public static final int _time = 4;
 	public static final int _bezeichnung = 5;
 	public static final int _kommazahl = 6;
-	public static final int maxT = 13;
+	public static final int maxT = 12;
 
 	static final boolean _T = true;
 	static final boolean _x = false;
@@ -109,16 +109,6 @@ public class Parser {
 		println(""); 
 		
 		Expect(11);
-		int task = 0; 
-		while (la.kind == 2) {
-			Tasks();
-			task++; 
-		}
-		println(""); 
-		println("Es gibt " + task + " Tasks."); 
-		println(""); 
-		
-		Expect(12);
 		int book = 0; 
 		while (la.kind == 5) {
 			Booking();
@@ -128,20 +118,13 @@ public class Parser {
 		println("Das sind " + book + " Bookings."); 
 		println(""); 
 		
+		
 	}
 
 	void Developer() {
 		String initials = Initials();
 		String name = Name();
 		println("    " + name + " ["+ initials +"]"); 
-	}
-
-	void Tasks() {
-		String id = id();
-		String status = status();
-		float remainingEffort = remainingEffort();
-		String description = description();
-		println(id + " " + status + " " + remainingEffort+ "'"+ description +"'"); 
 	}
 
 	void Booking() {
@@ -205,34 +188,6 @@ public class Parser {
 		
 	}
 
-	String  id() {
-		String  id;
-		Expect(2);
-		id = t.val; 
-		return id;
-	}
-
-	String  status() {
-		String  status;
-		Expect(2);
-		status = t.val; 
-		return status;
-	}
-
-	float  remainingEffort() {
-		float  remainingEffort;
-		Expect(6);
-		remainingEffort = Float.valueOf(t.val); 
-		return remainingEffort;
-	}
-
-	String  description() {
-		String  description;
-		Expect(2);
-		description = t.val; 
-		return description;
-	}
-
 
 
 	public void Parse() {
@@ -245,7 +200,7 @@ public class Parser {
 	}
 
 	private static final boolean[][] set = {
-		{_T,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x}
+		{_T,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x,_x, _x,_x}
 
 	};
 } // end Parser
@@ -281,9 +236,8 @@ class Errors {
 			case 8: s = "\"of\" expected"; break;
 			case 9: s = "\"Taskboard\" expected"; break;
 			case 10: s = "\"Developers\" expected"; break;
-			case 11: s = "\"Tasks\" expected"; break;
-			case 12: s = "\"Bookings\" expected"; break;
-			case 13: s = "??? expected"; break;
+			case 11: s = "\"Bookings\" expected"; break;
+			case 12: s = "??? expected"; break;
 			default: s = "error " + n; break;
 		}
 		printMsg(line, col, s);
