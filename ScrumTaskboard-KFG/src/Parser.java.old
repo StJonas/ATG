@@ -91,21 +91,32 @@ public class Parser {
 	}
 	
 	void ScrumTaskboard() {
-		println("Entwickler/innen:"); 
-		
+		int try; 
 		Expect(7);
 		Expect(8);
 		Expect(9);
 		Expect(3);
 		Expect(4);
 		Expect(10);
+		int devs = 0; 
 		while (la.kind == 1) {
 			Developer();
+			devs++; 
 		}
+		println(""); 
+		println("Das sind " + devs + " Entwickler/innen."); 
+		println(""); 
+		
 		Expect(11);
+		int book = 0; 
 		while (la.kind == 5) {
-			Booking();
+			try = Booking();
+			book++; 
 		}
+		println(""); 
+		println("Das sind " + book + " Bookings."); 
+		println("");
+		
 	}
 
 	void Developer() {
@@ -113,12 +124,15 @@ public class Parser {
 		String name = Name();
 	}
 
-	void Booking() {
+	int  Booking() {
+		int  try;
 		String bezeichnung = Bezeichnung();
 		Inhalt();
 		while (la.kind == 3) {
 			Inhalt();
 		}
+		int try = 0; 
+		return try;
 	}
 
 	String  Initials() {
@@ -166,8 +180,10 @@ public class Parser {
 	}
 
 	void WorkDone() {
-		String init = Initials();
+		String initials = Initials();
 		float kommazahl2 = Kommazahl();
+		println(initials);
+		
 	}
 
 

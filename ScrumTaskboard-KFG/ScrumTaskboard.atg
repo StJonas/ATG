@@ -41,10 +41,6 @@ IGNORE '\r' + '\n' + '\t'
 PRODUCTIONS
 
 ScrumTaskboard = 
-
-	(. 
-	println("ATG"); 
-	.)
 	
     "Export" "of" "Taskboard" date time 
     "Developers" (. int devs = 0; .)
@@ -62,8 +58,8 @@ ScrumTaskboard =
 	(. 
 	println(""); 
 	println("Das sind " + book + " Bookings."); 
-	println(""); 
-	.)
+	println("");
+	.)	
 	.
 
 Developer = 
@@ -79,7 +75,7 @@ Name<^String name> =
     string (. name = t.val; .)
 	.	
 		
-Booking = 
+Booking= 
 	Bezeichnung<^String bezeichnung>
 	Inhalt {Inhalt}
 	.
@@ -95,8 +91,11 @@ Inhalt =
 	.
 
 WorkDone = 
-	Initials<^String init>
+	Initials<^String initials> 
 	Kommazahl<^float kommazahl2>
+	(.
+	println(initials);
+	.)
 	.
 
 Date<^String date> = 

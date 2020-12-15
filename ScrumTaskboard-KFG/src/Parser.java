@@ -91,8 +91,6 @@ public class Parser {
 	}
 	
 	void ScrumTaskboard() {
-		println("ATG"); 
-		
 		Expect(7);
 		Expect(8);
 		Expect(9);
@@ -116,7 +114,7 @@ public class Parser {
 		}
 		println(""); 
 		println("Das sind " + book + " Bookings."); 
-		println(""); 
+		println("");
 		
 	}
 
@@ -178,8 +176,10 @@ public class Parser {
 	}
 
 	void WorkDone() {
-		String init = Initials();
+		String initials = Initials();
 		float kommazahl2 = Kommazahl();
+		println(initials);
+		
 	}
 
 
