@@ -47,11 +47,23 @@ ScrumTaskboard =
 	.)
 	
     "Export" "of" "Taskboard" date time 
-    "Developers" 
-	{ Developer }
+    "Developers" (. int devs = 0; .)
+	{ Developer (. devs++; .) }
 	
-	"Bookings"
-	{ Booking }
+	(. 
+	println(""); 
+	println("Das sind " + devs + " Entwickler/innen."); 
+	println(""); 
+	.)
+	
+	"Bookings" (. int book = 0; .)
+	{ Booking (. book++; .) }
+	
+	(. 
+	println(""); 
+	println("Das sind " + book + " Bookings."); 
+	println(""); 
+	.)
 	.
 
 Developer = 

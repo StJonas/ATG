@@ -91,7 +91,7 @@ public class Parser {
 	}
 	
 	void ScrumTaskboard() {
-		println("Entwickler/innen:"); 
+		println("ATG"); 
 		
 		Expect(7);
 		Expect(8);
@@ -99,13 +99,25 @@ public class Parser {
 		Expect(3);
 		Expect(4);
 		Expect(10);
+		int devs = 0; 
 		while (la.kind == 1) {
 			Developer();
+			devs++; 
 		}
+		println(""); 
+		println("Das sind " + devs + " Entwickler/innen."); 
+		println(""); 
+		
 		Expect(11);
+		int book = 0; 
 		while (la.kind == 5) {
 			Booking();
+			book++; 
 		}
+		println(""); 
+		println("Das sind " + book + " Bookings."); 
+		println(""); 
+		
 	}
 
 	void Developer() {
