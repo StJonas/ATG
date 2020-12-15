@@ -28,8 +28,7 @@ TOKENS
     date = digit digit digit digit '-' digit digit '-' digit digit.
     time = hour1st digit ':' min1st digit.
 	bezeichnung = digit digit letter.
-	kommazahl = digit {digit} ["." digit].
-	ganzzahl = digit {digit} .
+	kommazahl = digit {digit} ["."] [digit].
    
 COMMENTS FROM "/*" TO "*/" NESTED
 
@@ -127,7 +126,7 @@ Kommazahl<^float kommazahl> =
 Tasks = 
     id<^String id> 
     status<^String status> 
-	remainingEffort<^int remainingEffort> 
+	remainingEffort<^float remainingEffort> 
 	description<^String description> 
 	(. println(id + " " + status + " " + remainingEffort+ "'"+ description +"'"); .)
 	.
@@ -137,8 +136,8 @@ id<^String id> =
 status<^String status> =
     string (. status = t.val; .)
 	.	
-remainingEffort<^int remainingEffort> =
-    ganzzahl (. remainingEffort = Integer.parseInt(t.val); .)
+remainingEffort<^float remainingEffort> =
+    kommazahl (. remainingEffort = Float.valueOf(t.val); .)
 	.	
 description<^String description> =
     string (. description = t.val; .)

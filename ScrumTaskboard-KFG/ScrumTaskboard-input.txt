@@ -23,6 +23,7 @@ Tasks
 	42r done 1.5 "Restaufwand prüfen"
 	77a done 2 "MC für Messe fertigstellen"
 	54c done 1.4 "ANZ01-RF03 Retouren für anonyme Kunden zulassen"
+
 	
 Bookings
 	54c	2020-08-04 1.3 ljo 2
