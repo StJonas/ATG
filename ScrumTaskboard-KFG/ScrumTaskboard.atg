@@ -64,11 +64,6 @@ ScrumTaskboard =
 	println("Das sind " + book + " Bookings."); 
 	println(""); 
 	.)
-	
-	(.
-	
-	.)
-	
 	.
 
 Developer = 
