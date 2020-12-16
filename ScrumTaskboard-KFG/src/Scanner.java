@@ -414,7 +414,7 @@ public class Scanner {
 				case 3:
 					{t.kind = 2; break loop;}
 				case 4:
-					if (ch >= '0' && ch <= '9') {AddCh(); state = 5; break;}
+					if (ch >= '0' && ch <= '1') {AddCh(); state = 5; break;}
 					else {state = 0; break;}
 				case 5:
 					if (ch >= '0' && ch <= '9') {AddCh(); state = 6; break;}
@@ -423,7 +423,7 @@ public class Scanner {
 					if (ch == '-') {AddCh(); state = 7; break;}
 					else {state = 0; break;}
 				case 7:
-					if (ch >= '0' && ch <= '9') {AddCh(); state = 8; break;}
+					if (ch >= '0' && ch <= '3') {AddCh(); state = 8; break;}
 					else {state = 0; break;}
 				case 8:
 					if (ch >= '0' && ch <= '9') {AddCh(); state = 9; break;}

@@ -118,74 +118,53 @@ public class Parser {
 		println("Das sind " + book + " Bookings."); 
 		println(""); 
 		
-		
 	}
 
 	void Developer() {
-		String initials = Initials();
-		String name = Name();
-		println("    " + name + " ["+ initials +"]"); 
+		Initial();
+		Name();
 	}
 
 	void Booking() {
-		String bezeichnung = Bezeichnung();
-		println(bezeichnung);  
+		Bezeichnung();
 		Inhalt();
 		while (la.kind == 3) {
 			Inhalt();
 		}
 	}
 
-	String  Initials() {
-		String  initials;
+	void Initial() {
 		Expect(1);
-		initials = t.val; 
-		return initials;
 	}
 
-	String  Name() {
-		String  name;
+	void Name() {
 		Expect(2);
-		name = t.val; 
-		return name;
 	}
 
-	String  Bezeichnung() {
-		String  bezeichnung;
+	void Bezeichnung() {
 		Expect(5);
-		bezeichnung = t.val; 
-		return bezeichnung;
 	}
 
 	void Inhalt() {
-		String date = Date();
-		float kommazahl1 = Kommazahl();
-		println("	" + date + ": " + kommazahl1);  
+		Date();
+		Kommazahl();
 		WorkDone();
 		while (la.kind == 1) {
 			WorkDone();
 		}
 	}
 
-	String  Date() {
-		String  date;
+	void Date() {
 		Expect(3);
-		date = t.val; 
-		return date;
 	}
 
-	float  Kommazahl() {
-		float  kommazahl;
+	void Kommazahl() {
 		Expect(6);
-		kommazahl = Float.valueOf(t.val); 
-		return kommazahl;
 	}
 
 	void WorkDone() {
-		String init = Initials();
-		float kommazahl2 = Kommazahl();
-		println("		" + init + " - " + kommazahl2);
-		
+		Initial();
+		Kommazahl();
 	}
 
 

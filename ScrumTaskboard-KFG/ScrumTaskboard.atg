@@ -21,11 +21,13 @@ CHARACTERS
     min1st = "012345".
     letter =  'a'..'z'. 
     anyButQuote = ANY - '"'.
+	digitM =  "01".
+	digitT =  "0123".
 
 TOKENS
     initials = letter { letter }.
     string = '"' { anyButQuote } '"'.
-    date = digit digit digit digit '-' digit digit '-' digit digit.
+    date = digit digit digit digit '-' digitM digit '-' digitT digit.
     time = hour1st digit ':' min1st digit.
 	bezeichnung = digit digit letter.
 	kommazahl = digit {digit} ["." digit].
@@ -65,57 +67,47 @@ ScrumTaskboard =
 	println(""); 
 	.)
 	
-	(.
-	
-	.)
-	
 	.
 
 Developer = 
-    Initials<^String initials> 
-    Name<^String name> 
-	(. println("    " + name + " ["+ initials +"]"); .)
+    Initial
+    Name
 	.
 		
-Initials<^String initials> =
-	initials (. initials = t.val; .)
+Initial =
+	initials
 	.
 	
-Name<^String name> =
-    string (. name = t.val; .)
+Name =
+    string
 	.	
 		
 Booking = 
-	Bezeichnung<^String bezeichnung>
-	(. println(bezeichnung);  .)
+	Bezeichnung
 	Inhalt {Inhalt}
 	.
 	
-Bezeichnung<^String bezeichnung> =
-	 bezeichnung (. bezeichnung = t.val; .)
+Bezeichnung =
+	 bezeichnung
 	.	
 	
 Inhalt = 
-	Date<^String date>
-	Kommazahl<^float kommazahl1>
-	(. println("	" + date + ": " + kommazahl1);  .)
+	Date
+	Kommazahl
 	WorkDone {WorkDone}
 	.
 
 WorkDone = 
-	Initials<^String init>
-	Kommazahl<^float kommazahl2>
-	(. 
-	println("		" + init + " - " + kommazahl2);
-	.)
+	Initial
+	Kommazahl
 	.
 
-Date<^String date> = 
-	date (. date = t.val; .)
+Date = 
+	date
 	.
 	
-Kommazahl<^float kommazahl> =
-	kommazahl (. kommazahl = Float.valueOf(t.val); .)
+Kommazahl =
+	kommazahl
 	.
 
 END ScrumTaskboard.
