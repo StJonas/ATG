@@ -1,46 +1,7 @@
 
 Das sind 9 Entwickler/innen.
-
-ljo
-1
-ljo
-ph
-2
-ljo
-ph
-fell
-3
-ljo
-fell
-2
-ljo
-1
-ljo
-was
-2
-was
-1
-fell
-1
-ph
-1
-ph
-1
-hs
-1
-hs
-1
-hs
-1
-hs
-1
-was
-1
-hs
-1
-hs
-1
-
 Das sind 7 Bookings.
 
+Diese Entwickler haben am Sprint teilgenommen: [ljo, fell, ph, was, hs]
+Diese Entwickler haben nicht am Sprint teilgenommen: [mjo, bka, webro]
 0 errors detected

@@ -8,7 +8,8 @@ COMPILER ScrumTaskboard
   --- GLOBAL FIELDS AND METHODS
   ----------------------------------------------------------*/
 
-	HashSet<String> set = new HashSet<String>();
+	HashSet<String> setInits = new HashSet<String>();
+	HashSet<String> setInitsAll = new HashSet<String>();
 
     void println(String string) { 
 		System.out.println(string);
@@ -50,24 +51,23 @@ ScrumTaskboard =
     "Developers" (. int devs = 0; .)
 	{ Developer (. devs++; .) }
 	
-	(. 
-	println(""); 
-	println("Das sind " + devs + " Entwickler/innen."); 
-	println(""); 
-	.)
-	
 	"Bookings" (. int book = 0; .)
 	{ Booking (. book++; .) }
 	
 	(. 
 	println(""); 
+	println("Das sind " + devs + " Entwickler/innen."); 
 	println("Das sind " + book + " Bookings."); 
 	println("");
+	println("Diese Entwickler haben am Sprint teilgenommen: " + setInits.toString());
+	setInitsAll.removeAll(setInits);
+	println("Diese Entwickler haben nicht am Sprint teilgenommen: " + setInitsAll.toString());
 	.)	
 	.
 
 Developer = 
     Initials<^String initials> 
+	(. setInitsAll.add(initials); .)
     Name<^String name> 
 	.
 		
@@ -99,8 +99,7 @@ WorkDone=
 	Kommazahl<^float kommazahl2>
 	(.
 	String init = initials;
-	println(init);
-	set.add(init);
+	setInits.add(init);
 	.)
 	.
 

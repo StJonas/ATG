@@ -25,7 +25,8 @@ public class Parser {
 	public Scanner scanner;
 	public Errors errors;
 
-	HashSet<String> set = new HashSet<String>();
+	HashSet<String> setInits = new HashSet<String>();
+	HashSet<String> setInitsAll = new HashSet<String>();
 
     void println(String string) { 
 		System.out.println(string);
@@ -108,10 +109,6 @@ public class Parser {
 			Developer();
 			devs++; 
 		}
-		println(""); 
-		println("Das sind " + devs + " Entwickler/innen."); 
-		println(""); 
-		
 		Expect(11);
 		int book = 0; 
 		while (la.kind == 5) {
@@ -119,13 +116,18 @@ public class Parser {
 			book++; 
 		}
 		println(""); 
+		println("Das sind " + devs + " Entwickler/innen."); 
 		println("Das sind " + book + " Bookings."); 
 		println("");
+		println("Diese Entwickler haben am Sprint teilgenommen: " + setInits.toString());
+		setInitsAll.removeAll(setInits);
+		println("Diese Entwickler haben nicht am Sprint teilgenommen: " + setInitsAll.toString());
 		
 	}
 
 	void Developer() {
 		String initials = Initials();
+		setInitsAll.add(initials); 
 		String name = Name();
 	}
 
@@ -185,8 +187,7 @@ public class Parser {
 		String initials = Initials();
 		float kommazahl2 = Kommazahl();
 		String init = initials;
-		println(init);
-		set.add(init);
+		setInits.add(init);
 		
 	}
 
