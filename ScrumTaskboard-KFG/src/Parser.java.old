@@ -25,7 +25,7 @@ public class Parser {
 	public Scanner scanner;
 	public Errors errors;
 
-	HashSet<String> set = new HashSet();
+	HashSet<String> set = new HashSet<String>();
 
     void println(String string) { 
 		System.out.println(string);
