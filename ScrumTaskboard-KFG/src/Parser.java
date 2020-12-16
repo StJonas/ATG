@@ -1,5 +1,9 @@
 
 
+import java.util.*;
+
+
+
 public class Parser {
 	public static final int _EOF = 0;
 	public static final int _initials = 1;
@@ -21,7 +25,9 @@ public class Parser {
 	public Scanner scanner;
 	public Errors errors;
 
-	void println(String string) { 
+	HashSet<String> set = new HashSet<String>();
+
+    void println(String string) { 
 		System.out.println(string);
 	}
 		
@@ -178,7 +184,9 @@ public class Parser {
 	void WorkDone() {
 		String initials = Initials();
 		float kommazahl2 = Kommazahl();
-		println(initials);
+		String init = initials;
+		println(init);
+		set.add(init);
 		
 	}
 

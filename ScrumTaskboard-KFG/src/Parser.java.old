@@ -1,5 +1,9 @@
 
 
+import java.util.*;
+
+
+
 public class Parser {
 	public static final int _EOF = 0;
 	public static final int _initials = 1;
@@ -21,7 +25,9 @@ public class Parser {
 	public Scanner scanner;
 	public Errors errors;
 
-	void println(String string) { 
+	HashSet<String> set = new HashSet();
+
+    void println(String string) { 
 		System.out.println(string);
 	}
 		
@@ -91,7 +97,6 @@ public class Parser {
 	}
 	
 	void ScrumTaskboard() {
-		int try; 
 		Expect(7);
 		Expect(8);
 		Expect(9);
@@ -110,7 +115,7 @@ public class Parser {
 		Expect(11);
 		int book = 0; 
 		while (la.kind == 5) {
-			try = Booking();
+			Booking();
 			book++; 
 		}
 		println(""); 
@@ -124,15 +129,12 @@ public class Parser {
 		String name = Name();
 	}
 
-	int  Booking() {
-		int  try;
+	void Booking() {
 		String bezeichnung = Bezeichnung();
 		Inhalt();
 		while (la.kind == 3) {
 			Inhalt();
 		}
-		int try = 0; 
-		return try;
 	}
 
 	String  Initials() {
@@ -182,7 +184,9 @@ public class Parser {
 	void WorkDone() {
 		String initials = Initials();
 		float kommazahl2 = Kommazahl();
-		println(initials);
+		String init = initials;
+		println(init);
+		set.add(init);
 		
 	}
 
