@@ -4,4 +4,5 @@ Das sind 7 Bookings.
 
 Diese Entwickler haben am Sprint teilgenommen: [ljo, fell, ph, was, hs]
 Diese Entwickler haben nicht am Sprint teilgenommen: [mjo, bka, webro]
+Diese Stunden haben die Entwickler gearbeitet: {ljo=32.5, fell=10.5, ph=7.0, was=3.5, hs=12.5}
 0 errors detected

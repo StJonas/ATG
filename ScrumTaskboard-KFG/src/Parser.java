@@ -27,6 +27,8 @@ public class Parser {
 
 	HashSet<String> setInits = new HashSet<String>();
 	HashSet<String> setInitsAll = new HashSet<String>();
+	HashMap<String, Float> mapInit = new HashMap<String, Float>();
+	HashMap<String, String> allEmployees = new HashMap<String, String>();
 
     void println(String string) { 
 		System.out.println(string);
@@ -123,12 +125,15 @@ public class Parser {
 		setInitsAll.removeAll(setInits);
 		println("Diese Entwickler haben nicht am Sprint teilgenommen: " + setInitsAll.toString());
 		
+		println("Diese Stunden haben die Entwickler gearbeitet: " + mapInit.toString());
+		
 	}
 
 	void Developer() {
 		String initials = Initials();
 		setInitsAll.add(initials); 
 		String name = Name();
+		allEmployees.put(initials, name); 
 	}
 
 	void Booking() {
@@ -188,6 +193,12 @@ public class Parser {
 		float kommazahl2 = Kommazahl();
 		String init = initials;
 		setInits.add(init);
+		
+		if(mapInit.containsKey(init)){
+		mapInit.put(init, mapInit.get(init)+kommazahl2);
+		}else{
+		mapInit.put(init, kommazahl2);
+		}
 		
 	}
 

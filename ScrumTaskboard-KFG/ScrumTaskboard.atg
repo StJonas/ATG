@@ -10,6 +10,8 @@ COMPILER ScrumTaskboard
 
 	HashSet<String> setInits = new HashSet<String>();
 	HashSet<String> setInitsAll = new HashSet<String>();
+	HashMap<String, Float> mapInit = new HashMap<String, Float>();
+	HashMap<String, String> allEmployees = new HashMap<String, String>();
 
     void println(String string) { 
 		System.out.println(string);
@@ -62,13 +64,16 @@ ScrumTaskboard =
 	println("Diese Entwickler haben am Sprint teilgenommen: " + setInits.toString());
 	setInitsAll.removeAll(setInits);
 	println("Diese Entwickler haben nicht am Sprint teilgenommen: " + setInitsAll.toString());
+	
+	println("Diese Stunden haben die Entwickler gearbeitet: " + mapInit.toString());
 	.)	
 	.
 
 Developer = 
     Initials<^String initials> 
 	(. setInitsAll.add(initials); .)
-    Name<^String name> 
+    Name<^String name>
+	(. allEmployees.put(initials, name); .)
 	.
 		
 Initials<^String initials> =
@@ -100,6 +105,12 @@ WorkDone=
 	(.
 	String init = initials;
 	setInits.add(init);
+	
+	if(mapInit.containsKey(init)){
+		mapInit.put(init, mapInit.get(init)+kommazahl2);
+	}else{
+		mapInit.put(init, kommazahl2);
+	}
 	.)
 	.
 
