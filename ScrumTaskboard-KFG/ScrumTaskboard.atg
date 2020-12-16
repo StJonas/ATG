@@ -43,30 +43,18 @@ IGNORE '\r' + '\n' + '\t'
 PRODUCTIONS
 
 ScrumTaskboard = 
-
-	(. 
-	println("Entwickler/innen:"); 
-	.)
 	
     "Export" "of" "Taskboard" date time 
     "Developers" (. int devs = 0; .)
 	{ Developer (. devs++; .) }
 	
-	(. 
-	println(""); 
-	println("Das sind " + devs + " Entwickler/innen."); 
-	println(""); 
-	.)
-	
 	"Bookings" (. int book = 0; .)
 	{ Booking (. book++; .) }
 	
 	(. 
-	println(""); 
-	println("Das sind " + book + " Bookings."); 
-	println(""); 
+	println(book + " Bookings."); 
+	println(devs + " Entwickler/innen."); 
 	.)
-	
 	.
 
 Developer = 
