@@ -11,6 +11,19 @@ Developers
 	webro "Weber Ramona"
 	was "Wimmer Astrid"
 	
+Tasks
+	12d open 3.5 "Datenmodell erweitern und Datenzugriff implementieren"
+	12e 1 "Datenzugriff testen"
+	34a active 0.5 "StampType und Nummernkreise mappen"
+	19a 0 "Diese Aufgabe kommt doppelt vor"
+	19a 5 "Quoten für MC berechnen"	
+	31a done 7 "FG-Hintergründe erstellen"
+	31b active 2.5 "Quoten für MC berechnen"
+	31c active 1.5 "Idle Animation neu erstellen"
+	42r done 1.5 "Restaufwand prüfen"
+	77a done 2 "MC für Messe fertigstellen"
+	54c done 1.4 "ANZ01-RF03 Retouren für anonyme Kunden zulassen"
+	
 Bookings
 	54c	2020-08-04 1.3 ljo 2
 		2020-08-05 0.5 ljo 8 ph 1.5
@@ -35,6 +48,7 @@ Bookings
 
 	42r	2020-08-14 0 hs 0.5
 		2020-08-15 0.5 hs 0.5
+
 
 
 

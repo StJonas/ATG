@@ -29,8 +29,8 @@ TOKENS
     string = '"' { anyButQuote } '"'.
     date = digit digit digit digit '-' digitM digit '-' digitT digit.
     time = hour1st digit ':' min1st digit.
-	bezeichnung = digit digit letter.
 	kommazahl = digit {digit} ["." digit].
+	id = digit digit letter.
    
 COMMENTS FROM "/*" TO "*/" NESTED
 
@@ -48,12 +48,16 @@ ScrumTaskboard =
     "Developers" (. int devs = 0; .)
 	{ Developer (. devs++; .) }
 	
+	"Tasks" (. int tasks = 0; .)
+	{ Task (. tasks++; .) }
+	
 	"Bookings" (. int book = 0; .)
 	{ Booking (. book++; .) }
 	
 	(. 
 	println(book + " Bookings."); 
 	println(devs + " Entwickler/innen."); 
+	println(tasks + " Tasks."); 
 	.)
 	.
 
@@ -69,15 +73,18 @@ Initial =
 Name =
     string
 	.	
+	
+Task = 
+    Id
+    Status<^String status>
+	RemainingEffort
+	Description
+	.
 		
 Booking = 
-	Bezeichnung
+	Id
 	Inhalt {Inhalt}
 	.
-	
-Bezeichnung =
-	 bezeichnung
-	.	
 	
 Inhalt = 
 	Date
@@ -97,5 +104,22 @@ Date =
 Kommazahl =
 	kommazahl
 	.
+	
+Id =
+	id
+	.
+	
+Status <^String status> = 
+	(. status="open"; .) ["open" (. status="open"; .) | "active" (. status="active"; .) | "done" (. status="done"; .)]
+	.	
+	
+RemainingEffort =
+    kommazahl
+	.
+		
+Description =
+    string 
+	.	
+
 
 END ScrumTaskboard.

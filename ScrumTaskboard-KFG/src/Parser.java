@@ -6,9 +6,9 @@ public class Parser {
 	public static final int _string = 2;
 	public static final int _date = 3;
 	public static final int _time = 4;
-	public static final int _bezeichnung = 5;
-	public static final int _kommazahl = 6;
-	public static final int maxT = 12;
+	public static final int _kommazahl = 5;
+	public static final int _id = 6;
+	public static final int maxT = 16;
 
 	static final boolean _T = true;
 	static final boolean _x = false;
@@ -103,13 +103,20 @@ public class Parser {
 			devs++; 
 		}
 		Expect(11);
+		int tasks = 0; 
+		while (la.kind == 6) {
+			Task();
+			tasks++; 
+		}
+		Expect(12);
 		int book = 0; 
-		while (la.kind == 5) {
+		while (la.kind == 6) {
 			Booking();
 			book++; 
 		}
 		println(book + " Bookings."); 
 		println(devs + " Entwickler/innen."); 
+		println(tasks + " Tasks."); 
 		
 	}
 
@@ -118,8 +125,15 @@ public class Parser {
 		Name();
 	}
 
+	void Task() {
+		Id();
+		String status = Status();
+		RemainingEffort();
+		Description();
+	}
+
 	void Booking() {
-		Bezeichnung();
+		Id();
 		Inhalt();
 		while (la.kind == 3) {
 			Inhalt();
@@ -134,8 +148,34 @@ public class Parser {
 		Expect(2);
 	}
 
-	void Bezeichnung() {
+	void Id() {
+		Expect(6);
+	}
+
+	String  Status() {
+		String  status;
+		status="open"; 
+		if (la.kind == 13 || la.kind == 14 || la.kind == 15) {
+			if (la.kind == 13) {
+				Get();
+				status="open"; 
+			} else if (la.kind == 14) {
+				Get();
+				status="active"; 
+			} else {
+				Get();
+				status="done"; 
+			}
+		}
+		return status;
+	}
+
+	void RemainingEffort() {
 		Expect(5);
+	}
+
+	void Description() {
+		Expect(2);
 	}
 
 	void Inhalt() {
@@ -152,7 +192,7 @@ public class Parser {
 	}
 
 	void Kommazahl() {
-		Expect(6);
+		Expect(5);
 	}
 
 	void WorkDone() {
@@ -172,7 +212,7 @@ public class Parser {
 	}
 
 	private static final boolean[][] set = {
-		{_T,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x,_x, _x,_x}
+		{_T,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x,_x, _x,_x}
 
 	};
 } // end Parser
@@ -202,14 +242,18 @@ class Errors {
 			case 2: s = "string expected"; break;
 			case 3: s = "date expected"; break;
 			case 4: s = "time expected"; break;
-			case 5: s = "bezeichnung expected"; break;
-			case 6: s = "kommazahl expected"; break;
+			case 5: s = "kommazahl expected"; break;
+			case 6: s = "id expected"; break;
 			case 7: s = "\"Export\" expected"; break;
 			case 8: s = "\"of\" expected"; break;
 			case 9: s = "\"Taskboard\" expected"; break;
 			case 10: s = "\"Developers\" expected"; break;
-			case 11: s = "\"Bookings\" expected"; break;
-			case 12: s = "??? expected"; break;
+			case 11: s = "\"Tasks\" expected"; break;
+			case 12: s = "\"Bookings\" expected"; break;
+			case 13: s = "\"open\" expected"; break;
+			case 14: s = "\"active\" expected"; break;
+			case 15: s = "\"done\" expected"; break;
+			case 16: s = "??? expected"; break;
 			default: s = "error " + n; break;
 		}
 		printMsg(line, col, s);
